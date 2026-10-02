@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meine Arbeitshilfe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F9FE;--card:#fff;--ink:#12263A;--mute:#52667A;--navy:#0A3254;--sky:#BEE0FA;--line:#CFE2F1;--ok:#1F7A4D;--warn:#B25E00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1B2B;--card:#122A41;--ink:#E8F2FB;--mute:#9FB5C9;--navy:#BEE0FA;--sky:#1B4468;--line:#244B6B;--ok:#6FD39B;--warn:#F2A33A}}
+:root[data-theme="dark"]{--bg:#0B1B2B;--card:#122A41;--ink:#E8F2FB;--mute:#9FB5C9;--navy:#BEE0FA;--sky:#1B4468;--line:#244B6B;--ok:#6FD39B;--warn:#F2A33A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 56px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+header svg{width:56px;height:56px;flex:none}
+h1{font-size:1.75rem;line-height:1.15;margin:0;color:var(--navy)}
+header p{margin:2px 0 0;color:var(--mute)}
+.note{font-size:.88rem;color:var(--mute);margin:10px 0 18px}
+.tb-btn{display:inline-flex;gap:8px;align-items:center;background:var(--navy);color:var(--bg);border:0;border-radius:999px;padding:12px 20px;font:700 1rem inherit;font-family:inherit;cursor:pointer}
+:root[data-theme="dark"] .tb-btn{color:#0B1B2B}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #F2A33A;outline-offset:2px}
+section.plan{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:20px;margin-top:22px}
+h2{font-size:1.25rem;margin:0 0 14px;color:var(--navy)}
+label{display:block;font-weight:700;margin:16px 0 4px}
+.hint{font-size:.88rem;color:var(--mute);margin:0 0 6px}
+input[type=text],textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:10px 12px}
+textarea{min-height:84px;resize:vertical}
+select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:10px 12px}
+select:focus-visible{outline:3px solid #F2A33A;outline-offset:2px}
+.steps{list-style:none;margin:8px 0;padding:0}
+.steps li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.steps input[type=checkbox]{width:24px;height:24px;accent-color:var(--navy);flex:none}
+.steps .t{flex:1}
+.steps .done .t{text-decoration:line-through;color:var(--mute)}
+.steps button{background:none;border:0;color:var(--mute);font-size:1.1rem;cursor:pointer;padding:6px}
+.add{display:flex;gap:8px;margin-top:8px}
+.add button,.sec{background:var(--sky);color:var(--navy);border:0;border-radius:10px;padding:10px 16px;font:700 1rem inherit;font-family:inherit;cursor:pointer}
+:root[data-theme="dark"] .add button{color:var(--ink)}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.rate{display:flex;gap:8px;margin-top:6px}
+.rate button{flex:1;font-size:1.6rem;background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:8px;cursor:pointer}
+.rate button[aria-pressed=true]{border-color:var(--navy);background:var(--sky)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.saved{font-size:.88rem;color:var(--ok)}
+/* Werkzeugkasten */
+dialog{border:0;padding:0;width:min(680px,100%);max-width:100%;max-height:92dvh;border-radius:20px 20px 0 0;background:var(--bg);color:var(--ink);margin:auto auto 0}
+dialog::backdrop{background:rgba(10,30,50,.55)}
+.dh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;background:var(--navy);color:var(--bg);padding:14px 18px}
+:root[data-theme="dark"] .dh{color:#0B1B2B}
+.dh h2{margin:0;color:inherit}
+.dh button{background:none;border:0;color:inherit;font:700 1rem inherit;font-family:inherit;cursor:pointer;padding:6px}
+.db{padding:8px 16px 28px;overflow:auto;max-height:calc(92dvh - 60px)}
+details{background:var(--card);border:2px solid var(--line);border-radius:14px;margin:10px 0;padding:0 16px}
+summary{font-weight:700;cursor:pointer;padding:14px 0;color:var(--navy)}
+details[open] summary{border-bottom:1px solid var(--line);margin-bottom:10px}
+details ul,details ol{padding-left:20px;margin:8px 0}
+details li{margin:6px 0}
+details p{margin:8px 0}
+.tip{background:var(--sky);border-radius:10px;padding:8px 12px;font-size:.95rem}
+.zones{display:grid;gap:8px;margin:10px 0}
+.zones div{padding:10px 12px;border-radius:10px;border:2px solid var(--line)}
+.z1{border-color:var(--ok)!important}.z2{border-color:var(--warn)!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (min-width:700px){dialog{margin:auto;border-radius:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<svg viewBox="0 0 120 120" role="img" aria-label="Logo"><circle cx="60" cy="60" r="56" fill="#0A3254"/><path d="M60 38c-8-6-20-7-28-4v46c8-3 20-2 28 4 8-6 20-7 28-4V34c-8-3-20-2-28 4z" fill="#BEE0FA"/><path d="M60 38v46" stroke="#0A3254" stroke-width="4"/></svg>
+<div><h1>Meine Arbeitshilfe</h1><p>Selbstreguliertes Lernen · by danielwendt</p></div>
+</header>
+<p class="note">Deine Einträge werden nur in diesem Browser gespeichert.</p>
+<button class="tb-btn" id="open">🧰 Werkzeugkasten</button>
+
+<section class="plan" aria-labelledby="ph">
+<h2 id="ph">Meine Lernstunde</h2>
+<label for="task">Woran arbeite ich?</label>
+<input type="text" id="task" placeholder="z. B. Mathe, Seite 42">
+
+<label for="goal">Mein Ziel für diese Stunde</label>
+<p class="hint">Konkret, machbar, überprüfbar – mit Zeitpunkt.</p>
+<textarea id="goal" placeholder="Bis zum Ende der Stunde habe ich Aufgabe 1–4 gelöst und kontrolliert."></textarea>
+
+<label>Meine Teilschritte</label>
+<p class="hint">2–4 Schritte. Fang mit dem leichtesten an.</p>
+<ul class="steps" id="steps"></ul>
+<div class="bar" aria-hidden="true"><i id="prog"></i></div>
+<form class="add" id="addf" onsubmit="return false">
+<input type="text" id="newstep" placeholder="Neuer Teilschritt" aria-label="Neuer Teilschritt">
+<button type="button" id="addb">Hinzufügen</button>
+</form>
+
+<label for="then">Wenn-dann-Plan gegen Ablenkung</label>
+<p class="hint">Wähle ein Beispiel aus oder schreib deinen eigenen Plan.</p>
+<select id="thenSel" aria-label="Beispiel für einen Wenn-dann-Plan">
+<option value="">Beispiel auswählen …</option>
+<option>Wenn ich ans Handy denke, dann lege ich es in die Tasche und arbeite weiter.</option>
+<option>Wenn mein Nachbar quatscht, dann sage ich freundlich, dass ich gerade arbeite.</option>
+<option>Wenn ich müde werde, dann trinke ich Wasser und strecke mich kurz.</option>
+<option>Wenn es laut wird, dann setze ich mir Kopfhörer oder Ohrenschützer auf.</option>
+<option>Wenn ich nicht weiterkomme, dann gehe ich die Hilfekette durch.</option>
+<option>Wenn ich in Gedanken abschweife, dann lese ich meine Aufgabe noch einmal.</option>
+<option>Wenn mir etwas Wichtiges einfällt, dann schreibe ich es kurz auf und mache weiter.</option>
+<option>Wenn ich keine Lust habe, dann arbeite ich nur 5 Minuten und entscheide dann neu.</option>
+</select>
+<input type="text" id="then" placeholder="Wenn …, dann …" style="margin-top:8px">
+
+<label>Rückblick: Habe ich mein Ziel erreicht?</label>
+<div class="rate" id="rate" role="group" aria-label="Zielerreichung">
+<button type="button" data-v="ja" aria-pressed="false" aria-label="Ja">😀</button>
+<button type="button" data-v="teils" aria-pressed="false" aria-label="Teilweise">😐</button>
+<button type="button" data-v="nein" aria-pressed="false" aria-label="Noch nicht">🙁</button>
+</div>
+<label for="refl">Was hat geholfen? Was mache ich nächstes Mal anders?</label>
+<textarea id="refl"></textarea>
+
+<div class="row"><button class="sec" id="clear">Neue Lernstunde starten</button><span class="saved" id="saved" role="status"></span></div>
+</section>
+</div>
+
+<dialog id="tb" aria-labelledby="tbh">
+<div class="dh"><h2 id="tbh">Werkzeugkasten</h2><button id="close">Schließen ✕</button></div>
+<div class="db">
+
+<details open><summary>🆘 Die Hilfekette</summary>
+<p>Wenn du nicht weiterkommst, gehe die Kette Schritt für Schritt durch:</p>
+<ol>
+<li><b>Lies</b> die Aufgabe <b>noch einmal</b> langsam durch.</li>
+<li><b>Markiere</b> den <b>Operator</b> und die <b>Schlüsselwörter</b>.</li>
+<li><b>Nutze</b> angegebene <b>Hilfsmittel</b> und <b>Hilfekarten</b>.</li>
+<li><b>Bitte</b> eine Mitschülerin oder einen Mitschüler um Hilfe.</li>
+<li><b>Frage</b> bei deiner <b>Lehrkraft</b> nach.</li>
+</ol>
+<p class="tip">💡 <b>Operator</b> = das Wort, das dir sagt, <i>wie</i> du die Aufgabe bearbeiten sollst.<br>💡 <b>Schlüsselwörter</b> = die Wörter, die dir das <i>Thema</i> vorgeben.</p></details>
+
+<details><summary>🔑 Operatoren verstehen</summary>
+<ul>
+<li><b>Nennen:</b> knapp und präzise aufzählen, Stichpunkte reichen. <i>Nenne Lehrer, bei denen du Unterricht hast.</i></li>
+<li><b>Beschreiben:</b> strukturiert und ohne Wertung wiedergeben, Fachsprache, ganze Sätze. <i>Beschreibe den Weg zur Turnhalle.</i></li>
+<li><b>Vergleichen:</b> Gemeinsamkeiten und Unterschiede gegenüberstellen, gern als Tabelle. <i>Vergleiche Schule vor 2 Jahren und heute.</i></li>
+<li><b>Zusammenfassen:</b> das Wichtigste kurz in eigenen Worten wiedergeben. <i>Fasse den Text über die Geschichte deiner Schule zusammen.</i></li>
+<li><b>Einordnen:</b> etwas in einen größeren Zusammenhang stellen und den Zusammenhang beschreiben. <i>Ordne das Aussterben der Dinosaurier in die Erdzeitgeschichte ein.</i></li>
+<li><b>Erklären:</b> Zusammenhänge verständlich machen, ohne Wertung. <i>Erkläre die Entstehung einer Sonnenfinsternis.</i></li>
+<li><b>Erläutern:</b> wie Erklären – aber mit Beispielen. <i>Erläutere die Organisation des Mittagessens an deiner Schule.</i></li>
+<li><b>Begründen:</b> Gründe und Beispiele bringen, die eine Aussage stützen. <i>Begründe die Notwendigkeit von Impfungen.</i></li>
+<li><b>Beurteilen:</b> einschätzen und die eigene Meinung mit Gründen belegen. <i>Beurteile Chancen und Risiken von Kernenergie.</i></li>
+</ul></details>
+
+<details><summary>🎯 Gute (SMARTe) Ziele setzen</summary>
+<p>Ein gutes Ziel ist <b>konkret, machbar und überprüfbar</b>.</p>
+<ul><li>❌ „Ich mache Mathe.“</li><li>✅ „Bis zum Ende der Stunde habe ich Aufgabe 1–4 gelöst und mit dem Lösungsblatt kontrolliert.“</li></ul>
+<p>Merkhilfe <b>SMART</b>: <b>s</b>pezifisch · <b>m</b>essbar · <b>a</b>ttraktiv · <b>r</b>ealistisch · <b>t</b>erminiert („bis zum Ende der Stunde“).</p></details>
+
+<details><summary>🪜 Aufgaben in Schritte zerlegen</summary>
+<p>Große Aufgaben wirken schwer – kleine Schritte nicht.</p>
+<ul><li>Schreib 2–4 Teilschritte auf.</li><li>Beginne mit dem leichtesten Schritt – so kommst du in Schwung.</li><li>Hake jeden Schritt ab. Abhaken motiviert!</li></ul></details>
+
+<details><summary>🧠 Blurting – teste dich selbst</summary>
+<p>Perfekt nach dem Lernen eines Themas, dauert nur ca. 5 Minuten:</p>
+<ol><li>Nimm ein leeres Blatt.</li><li>Schreib 5 Minuten lang <b>alles</b> auf, was du zum Thema weißt – ohne Ordnung, ohne Pause, egal in welcher Reihenfolge.</li><li>Vergleiche mit deinen Unterlagen: Was fehlt? Das sind deine Lücken – genau da lernst du weiter.</li></ol></details>
+
+<details><summary>🔁 2×3×4-Methode (Vokabeln &amp; Definitionen)</summary>
+<p>Zum schnellen Festigen von Vokabeln, Definitionen oder Formeln:</p>
+<ul>
+<li><b>2× lesen:</b> einen kleinen Abschnitt zweimal gründlich durchlesen.</li>
+<li><b>3× aufsagen &amp; aufschreiben:</b> Unterlagen zur Seite, dreimal laut in eigenen Worten erklären und zusätzlich aufschreiben.</li>
+<li><b>4× wiederholen:</b> mit Abstand – z. B. am Ende der Stunde noch einmal, dann morgen, dann nach ein paar Tagen.</li></ul>
+<p class="tip">Das laute Aufsagen zwingt dein Gehirn, aktiv nach den richtigen Worten zu suchen – so bleibt es hängen.</p></details>
+
+<details><summary>🔤 ABC-Liste (Ideen sammeln)</summary>
+<p>Schnelles Brainstorming in 2–3 Minuten:</p>
+<ol><li>Schreib die Buchstaben A–Z untereinander und wähle dein Thema.</li><li>Stelle den Timer auf 2–3 Minuten.</li><li>Wandere mit den Augen über die Buchstaben und notiere Begriffe zum Thema, wie sie dir einfallen.</li><li>Zähle am Ende: Wie viele hast du geschafft? Beim nächsten Mal schlägst du deinen Rekord.</li></ol></details>
+
+<details><summary>🧦 Störung? Schnuller, Socke oder Dachziegel</summary>
+<p>Nicht jedes Problem verdient sofort deine Aufmerksamkeit. Frag dich: <i>Was passiert, wenn ich es bis morgen liegen lasse?</i></p>
+<ul>
+<li><b>🍼 Schnuller</b> – nichts passiert, löst sich oft von selbst. → Kurz notieren, weiterarbeiten.</li>
+<li><b>🧦 Socke</b> – nervig, aber nicht gefährlich. → Sammeln und später in einem Block erledigen.</li>
+<li><b>🧱 Dachziegel</b> – wird deutlich schlimmer. → Sofort handeln oder Hilfe holen.</li></ul></details>
+
+<details><summary>🧗 Lernzonenmodell</summary>
+<div class="zones">
+<div><b>Komfortzone:</b> alles leicht und bekannt – gemütlich, aber du lernst nichts Neues.</div>
+<div class="z1"><b>Lernzone:</b> es fordert dich, du machst Fehler – <b>genau hier findet echtes Lernen statt!</b></div>
+<div class="z2"><b>Panikzone:</b> zu viel auf einmal, der Kopf macht dicht – hol dir Unterstützung oder mach eine kurze Pause.</div></div>
+<p>Gehe immer wieder bewusst in die Lernzone.</p></details>
+
+<details><summary>🧲 Wenn-dann-Pläne gegen Ablenkung</summary>
+<p>Überlege <b>vorher</b>, was dich stören könnte – und was du dann tust:</p>
+<ul><li>Wenn ich ans Handy denke, <b>dann</b> lege ich es in die Tasche und arbeite weiter.</li><li>Wenn mein Nachbar quatscht, <b>dann</b> sage ich freundlich, dass ich gerade arbeite.</li><li>Wenn ich müde werde, <b>dann</b> trinke ich Wasser und strecke mich kurz.</li></ul></details>
+
+<details><summary>💪 Motivation</summary>
+<ul><li>Erinnere dich an dein <b>Warum</b>: Wofür brauchst du das?</li><li>Vergleiche dich mit <b>dir selbst von gestern</b>, nicht mit anderen.</li><li>Fehler sind Futter fürs Gehirn – dort passiert das Lernen.</li><li>Belohne dich nach getaner Arbeit mit etwas Kleinem.</li></ul></details>
+</div>
+</dialog>
+
+<script>
+(function(){
+var K='srl-arbeitshilfe-v1',$=function(i){return document.getElementById(i)};
+var s={task:'',goal:'',then:'',refl:'',rate:'',steps:[]};
+try{var r=localStorage.getItem(K);if(r)s=Object.assign(s,JSON.parse(r))}catch(e){}
+var t;
+function save(){try{localStorage.setItem(K,JSON.stringify(s));$('saved').textContent='Gespeichert ✓';clearTimeout(t);t=setTimeout(function(){$('saved').textContent=''},1500)}catch(e){}}
+function esc(x){var d=document.createElement('div');d.textContent=x;return d.innerHTML}
+function draw(){
+ var ul=$('steps');ul.innerHTML='';
+ s.steps.forEach(function(st,i){
+  var li=document.createElement('li');if(st.d)li.className='done';
+  li.innerHTML='<input type="checkbox" '+(st.d?'checked':'')+' aria-label="Erledigt"><span class="t">'+esc(st.t)+'</span><button type="button" aria-label="Schritt löschen">✕</button>';
+  li.firstChild.onchange=function(){st.d=this.checked;save();draw()};
+  li.lastChild.onclick=function(){s.steps.splice(i,1);save();draw()};
+  ul.appendChild(li)});
+ var n=s.steps.length,d=s.steps.filter(function(x){return x.d}).length;
+ $('prog').style.width=(n?d/n*100:0)+'%';
+ [].forEach.call($('rate').children,function(b){b.setAttribute('aria-pressed',b.dataset.v===s.rate)})}
+['task','goal','then','refl'].forEach(function(k){$(k).value=s[k]||'';$(k).oninput=function(){s[k]=this.value;save()}});
+function add(){var v=$('newstep').value.trim();if(!v)return;s.steps.push({t:v,d:false});$('newstep').value='';save();draw()}
+$('thenSel').onchange=function(){if(!this.value)return;$('then').value=this.value;s.then=this.value;save();this.selectedIndex=0};
+$('addb').onclick=add;
+$('newstep').onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();add()}};
+$('rate').onclick=function(e){var b=e.target.closest('button');if(!b)return;s.rate=s.rate===b.dataset.v?'':b.dataset.v;save();draw()};
+$('clear').onclick=function(){if(!confirm('Alle Einträge dieser Lernstunde löschen und neu starten?'))return;
+ s={task:'',goal:'',then:'',refl:'',rate:'',steps:[]};['task','goal','then','refl'].forEach(function(k){$(k).value=''});save();draw()};
+var dlg=$('tb');
+$('open').onclick=function(){dlg.showModal()};
+$('close').onclick=function(){dlg.close()};
+dlg.onclick=function(e){if(e.target===dlg)dlg.close()};
+draw();
+})();
+</script>
+</body>
+</html>
